@@ -1,26 +1,477 @@
-@import "tailwindcss";
+/* Tailwind CSS directives - these are processed by PostCSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
+
+/* Custom scrollbar for modern look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom focus styles for accessibility */
+.focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Typography improvements */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Custom gradient backgrounds for tattoo studio aesthetic */
+.gradient-dark {
+  background: linear-gradient(135deg, #0d1117 0%, #21262d 100%);
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, #f3a847 0%, #e4912a 100%);
+}
+
+/* Animation utilities */
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Artist grid hover effects - exactly like CodePen */
+.artist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  transition: all 400ms;
+}
+
+.artist-grid:hover .artist-box {
+  filter: grayscale(100%) opacity(24%);
+}
+
+.artist-box {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  transition: all 400ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.artist-grid .artist-box:hover {
+  filter: grayscale(0%) opacity(100%);
+}
+
+.artist-grid:has(.artist-box-1:hover) {
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+}
+
+.artist-grid:has(.artist-box-2:hover) {
+  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr;
+}
+
+.artist-grid:has(.artist-box-3:hover) {
+  grid-template-columns: 1fr 1fr 1.5fr 1fr 1fr;
+}
+
+.artist-grid:has(.artist-box-4:hover) {
+  grid-template-columns: 1fr 1fr 1fr 1.5fr 1fr;
+}
+
+.artist-grid:has(.artist-box-5:hover) {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
+}
+
+/* Staggered positioning - exactly like CodePen */
+.artist-grid .artist-box:nth-child(odd) {
+  transform: translateY(-16px) !important;
+}
+
+.artist-grid .artist-box:nth-child(even) {
+  transform: translateY(16px) !important;
+}
+
+/* Artist name overlay - exactly like CodePen */
+.artist-box::after {
+  content: attr(data-text);
+  position: absolute;
+  bottom: 20px;
+  background: #000;
+  color: #fff;
+  padding: 10px 10px 10px 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transform: translateY(60px);
+  opacity: 0;
+  transition: all 400ms;
+}
+
+.artist-box:hover::after {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 400ms;
+}
+
+/* Instagram link overlay - modern style */
+.artist-box::before {
+  content: "Instagram";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: all 400ms ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.artist-box:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  transition-delay: 200ms;
+}
+
+/* Clean Instagram Photo Gallery Styling */
+.instagram-photo-card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  aspect-ratio: 4/5;
+  width: 100%;
+  max-width: 293px; /* Instagram's exact post width */
+  height: 366px; /* Instagram's exact post height (4:5 ratio) */
+}
+
+.instagram-photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.instagram-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.instagram-photo-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Instagram-style grid layout */
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 28px; /* Instagram's exact gap between posts */
+  max-width: 1200px; /* Wider to accommodate 6 columns */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1200px) {
+  .instagram-grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 900px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .instagram-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 614px; /* Instagram's mobile feed width */
+    gap: 15px;
+  }
+}
+
+@media (max-width: 614px) {
+  .instagram-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+    gap: 10px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .instagram-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 0 5px;
+  }
+}
+
+/* Instagram Feed Gallery Styling - Clean slate for modern carousel */
+.instagram-feed-gallery {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  padding: 12px;
+  transition: 0.3s;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.instagram-feed-gallery:hover .instagram-feed-image-container {
+  filter: grayscale(1);
+}
+
+.instagram-feed-item {
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  position: relative;
+  min-height: 350px;
+}
+
+.instagram-feed-item:hover .instagram-feed-image-container {
+  filter: grayscale(0);
+}
+
+.instagram-feed-item:hover .instagram-feed-caption {
+  opacity: 1;
+}
+
+.instagram-feed-link {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.instagram-feed-thumb {
+  position: relative;
+  height: 100%;
+  margin: 0;
+}
+
+.instagram-feed-image-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+  position: relative;
+}
+
+/* Disable hover zoom on the wrapper to keep image framing consistent */
+.instagram-feed-image-container:hover {
+  transform: none;
+}
+
+.instagram-feed-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 25px 15px 15px;
+  width: 100%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 14px;
+  color: white;
+  opacity: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+  transition: 0.3s;
+  margin: 0;
+}
+
+/* Instagram post embed styling */
+.instagram-post-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.instagram-post-container blockquote {
+  margin: 0 !important;
+  border-radius: 8px !important;
+  height: 100% !important;
+}
+
+/* Zoom and crop the Instagram iframe so only the photo area is visible */
+.instagram-post-container iframe {
+  position: absolute;
+  top: -2%;
+  left: -2%;
+  width: 104% !important;
+  height: 104% !important;
+  border: 0;
+  transform: scale(1.05);
+  transform-origin: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .instagram-feed-gallery {
+    max-width: 1200px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .instagram-feed-gallery {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1000px;
+  }
+}
+
+@media (max-width: 768px) {
+  .instagram-feed-gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  
+  .instagram-feed-item {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .instagram-feed-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  
+  .instagram-feed-item {
+    min-height: 220px;
+  }
+}
+
+/* Loading animation for Instagram embed */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+

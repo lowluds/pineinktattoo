@@ -1,0 +1,9 @@
+/* This file helps IDEs understand Tailwind CSS directives */
+@tailwind base;
+@tailwind components; 
+@tailwind utilities;
+
+/* Custom CSS variables for IDE recognition */
+:root {
+  /* Your existing CSS variables are properly defined in globals.css */
+}
