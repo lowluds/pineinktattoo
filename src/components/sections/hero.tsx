@@ -43,6 +43,10 @@ export function Hero() {
   const [isClient, setIsClient] = useState(false)
   const [ready, setReady] = useState(false)
 
+  // Asset paths (use forward slashes, absolute from public)
+  const VIDEO_SRC = "/videos/shop/pink-ink-hero.mp4";
+  const POSTER_SRC = "/images/pineinktattoos/shop/hero-tatto-pic.png";
+
   useEffect(() => {
     setIsClient(true)
   }, [])
@@ -54,21 +58,21 @@ export function Hero() {
         {/* Fallback overlay, fades out when video is ready */}
         <div
           aria-hidden
-          className={`absolute inset-0 bg-black/40 transition-opacity duration-500 z-0 ${ready ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+          className={`absolute inset-0 z-0 bg-cover bg-center transition-opacity duration-300 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+          style={{ backgroundImage: `url(${POSTER_SRC})` }}
         />
-        {/* MP4 Video Background - Primary */}
         <video
+          data-role="hero-video"
+          className="absolute inset-0 z-10 h-full w-full object-cover"
+          src={VIDEO_SRC}
+          poster={POSTER_SRC}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          poster="/images/pineinktattoos/shop/hero-tatto-pic.png"
-          className="absolute inset-0 w-full h-full object-cover z-10"
           onCanPlay={() => setReady(true)}
-        >
-          <source src="/videos/shop/pink-ink-hero.mp4" type="video/mp4" />
-        </video>
+        />
         {/* Animated background elements - only render on client to avoid hydration issues */}
         {isClient && (
           <div className="absolute inset-0 overflow-hidden z-20">

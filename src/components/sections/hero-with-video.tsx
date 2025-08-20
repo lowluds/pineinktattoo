@@ -41,6 +41,11 @@ const particles = generateParticles()
 
 export function HeroWithVideo() {
   const [isClient, setIsClient] = useState(false)
+  const [ready, setReady] = useState(false)
+
+  // Asset paths (use forward slashes, absolute from public)
+  const VIDEO_SRC = "/videos/shop/pink-ink-hero.mp4";
+  const POSTER_SRC = "/images/pineinktattoos/shop/hero-tatto-pic.png";
 
   useEffect(() => {
     setIsClient(true)
@@ -50,21 +55,24 @@ export function HeroWithVideo() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video/GIF Background */}
       <div className="absolute inset-0 z-0">
-        {/* Background overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-ink-900/90 via-ink-800/80 to-transparent z-10" />
-        
-        {/* Video Background (more performant than GIF) */}
+        {/* Fallback overlay, fades out when video is ready */}
+        <div
+          aria-hidden
+          className={`absolute inset-0 z-0 bg-cover bg-center transition-opacity duration-300 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+          style={{ backgroundImage: `url(${POSTER_SRC})` }}
+        />
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          data-role="hero-video"
+          className="absolute inset-0 z-10 h-full w-full object-cover"
+          src={VIDEO_SRC}
+          poster={POSTER_SRC}
           autoPlay
-          loop
           muted
+          loop
           playsInline
-          poster="/images/hero-background-poster.jpg"
-        >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
-          <source src="/videos/hero-background.webm" type="video/webm" />
-        </video>
+          preload="auto"
+          onCanPlay={() => setReady(true)}
+        />
         
         {/* Animated background elements - only render on client to avoid hydration issues */}
         {isClient && (
