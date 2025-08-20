@@ -17,62 +17,28 @@ const stats = [
 
 export function Hero() {
   // video, poster, and ready state
-  const VIDEO_SRC = "/videos/shop/pink-ink-hero.mp4?v=4";
   const POSTER_SRC = "/images/pineinktattoo/shop/hero-tatto-pic.png";
-
   const [ready, setReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  // Reliable video playback on real devices
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    if (v.paused) {
-      v.play().catch(() => {
-        // if autoplay is blocked, the poster overlay stays visible
-      });
-    }
-  }, []);
-
-  // Defensive mobile playback guard and error logging
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-
-    const log = () => {
-      console.log("[hero-video]", {
-        paused: v.paused,
-        readyState: v.readyState,
-        currentTime: v.currentTime,
-        error: v.error?.message || null,
-        canPlayType: v.canPlayType("video/mp4"),
-        src: v.currentSrc || v.src,
-      });
-    };
-
-    // try play once more after mount
-    const t1 = setTimeout(() => { if (v.paused) v.play().catch(() => {}); }, 300);
-
-    // if not playing after 1500ms, keep overlay visible
+    v.muted = true;
+    const tryPlay = () => v.play().catch(() => {});
+    tryPlay();
+    const t1 = setTimeout(tryPlay, 300);
     const t2 = setTimeout(() => {
-      if (v.paused || v.currentTime === 0) {
-        setReady(false);    // show poster overlay
-        log();
-      }
-    }, 1500);
-
-    // user-gesture fallback, one time
-    const onTap = () => { if (v.paused) v.play().catch(() => {}); };
+      if (v.paused || v.currentTime === 0) setReady(false);
+    }, 1200);
+    const onTap = () => { if (v.paused) tryPlay(); };
     window.addEventListener("touchstart", onTap, { passive: true, once: true });
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      window.removeEventListener("touchstart", onTap);
-    };
+    return () => { clearTimeout(t1); clearTimeout(t2); window.removeEventListener("touchstart", onTap); };
   }, []);
 
   return (
-    <section className="relative h-[100svh] md:h-screen w-full overflow-hidden">
+  <section className="relative w-full overflow-hidden min-h-[100svh] md:h-screen">
       {/* Poster overlay under the video */}
       <div
         aria-hidden
@@ -86,21 +52,27 @@ export function Hero() {
       <video
         ref={videoRef}
         className="absolute inset-0 z-10 h-full w-full object-cover"
-        src={VIDEO_SRC}
         poster={POSTER_SRC}
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
+        disablePictureInPicture
         onPlaying={() => setReady(true)}
         onError={() => setReady(false)}
-      />
+      >
+        <source src="/videos/shop/pink-ink-hero-mobile.mp4?v=1" type="video/mp4" />
+        <source src="/videos/shop/pink-ink-hero.mp4?v=4" type="video/mp4" />
+      </video>
 
       {/* Content */}
       <div className="relative z-20 h-full">
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto flex h-full flex-col items-center justify-center text-center gap-6 pt-14 md:pt-0">
+          <div
+            className="max-w-4xl mx-auto flex h-full flex-col items-center justify-center text-center gap-6 pt-20 md:pt-0"
+            style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 64px)" }}
+          >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
