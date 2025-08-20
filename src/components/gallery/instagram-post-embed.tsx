@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Instagram, ExternalLink } from "lucide-react"
+import { Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface InstagramPostEmbedProps {
@@ -22,8 +22,8 @@ export function InstagramPostEmbed({ postUrl, title, artist }: InstagramPostEmbe
     script.async = true
     script.onload = () => {
       // Process Instagram embeds after script loads
-      if (window.instgrm) {
-        window.instgrm.Embeds.process()
+      if (typeof window !== "undefined" && window.instgrm?.Embeds?.process) {
+        window.instgrm.Embeds.process();
       }
       setIsLoading(false)
     }
@@ -40,8 +40,8 @@ export function InstagramPostEmbed({ postUrl, title, artist }: InstagramPostEmbe
   // Reprocess embeds when component mounts
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (window.instgrm) {
-        window.instgrm.Embeds.process()
+      if (typeof window !== "undefined" && window.instgrm?.Embeds?.process) {
+        window.instgrm.Embeds.process();
       }
     }, 1000)
 
@@ -83,6 +83,7 @@ export function InstagramPostEmbed({ postUrl, title, artist }: InstagramPostEmbe
           <div className="flex items-center justify-center w-full h-full">
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gold-500"></div>
           </div>
+
         )}
         
         <div className="instagram-post-container">
