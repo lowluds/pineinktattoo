@@ -33,6 +33,44 @@ export function Hero() {
     }
   }, []);
 
+  // Defensive mobile playback guard and error logging
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    const log = () => {
+      console.log("[hero-video]", {
+        paused: v.paused,
+        readyState: v.readyState,
+        currentTime: v.currentTime,
+        error: v.error?.message || null,
+        canPlayType: v.canPlayType("video/mp4"),
+        src: v.currentSrc || v.src,
+      });
+    };
+
+    // try play once more after mount
+    const t1 = setTimeout(() => { if (v.paused) v.play().catch(() => {}); }, 300);
+
+    // if not playing after 1500ms, keep overlay visible
+    const t2 = setTimeout(() => {
+      if (v.paused || v.currentTime === 0) {
+        setReady(false);    // show poster overlay
+        log();
+      }
+    }, 1500);
+
+    // user-gesture fallback, one time
+    const onTap = () => { if (v.paused) v.play().catch(() => {}); };
+    window.addEventListener("touchstart", onTap, { passive: true, once: true });
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener("touchstart", onTap);
+    };
+  }, []);
+
   return (
     <section className="relative h-[100svh] md:h-screen w-full overflow-hidden">
       {/* Poster overlay under the video */}
@@ -55,7 +93,8 @@ export function Hero() {
         loop
         playsInline
         preload="auto"
-        onCanPlay={() => setReady(true)}
+        onPlaying={() => setReady(true)}
+        onError={() => setReady(false)}
       />
 
       {/* Content */}
