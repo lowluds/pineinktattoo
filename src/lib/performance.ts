@@ -1,3 +1,7 @@
+// Userland type guard for PerformanceEventTiming
+function isPerformanceEventTiming(entry: PerformanceEntry): entry is PerformanceEventTiming {
+  return typeof (entry as any).processingStart === "number";
+}
 // Performance monitoring utilities
 export interface PerformanceMetrics {
   lcp: number
@@ -30,19 +34,21 @@ export class PerformanceMonitor {
 
       // FID (First Input Delay)
       const fidObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries()
+        const entries = list.getEntries();
         entries.forEach((entry) => {
-          this.metrics.fid = entry.processingStart - entry.startTime
-        })
-      })
-      fidObserver.observe({ entryTypes: ['first-input'] })
-      this.observers.push(fidObserver)
+          if (isPerformanceEventTiming(entry)) {
+            this.metrics.fid = entry.processingStart - entry.startTime;
+          }
+        });
+      });
+      fidObserver.observe({ entryTypes: ["first-input"] });
+      this.observers.push(fidObserver);
 
       // CLS (Cumulative Layout Shift)
       const clsObserver = new PerformanceObserver((list) => {
         let clsValue = 0
         for (const entry of list.getEntries()) {
-          if (!entry.hadRecentInput) {
+          if ('hadRecentInput' in entry && !(entry as any).hadRecentInput) {
             clsValue += (entry as any).value
           }
         }
@@ -116,7 +122,7 @@ export function isReducedMotion(): boolean {
 }
 
 export function shouldUseReducedAnimations(): boolean {
-  return isReducedMotion() || navigator.connection?.effectiveType === 'slow-2g'
+  return isReducedMotion() || (typeof navigator !== 'undefined' && 'connection' in navigator && (navigator as any).connection?.effectiveType === 'slow-2g')
 }
 
 // Network utilities
