@@ -41,6 +41,7 @@ const particles = generateParticles()
 
 export function Hero() {
   const [isClient, setIsClient] = useState(false)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
@@ -50,28 +51,27 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image/Video */}
       <div className="absolute inset-0 z-0">
-        <div className="
-        " />
-        
+        {/* Fallback overlay, fades out when video is ready */}
+        <div
+          aria-hidden
+          className={`absolute inset-0 bg-black/40 transition-opacity duration-500 z-0 ${ready ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        />
         {/* MP4 Video Background - Primary */}
         <video
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
           poster="/images/pineinktattoos/shop/hero-tatto-pic.png"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ zIndex: 1 }}
+          className="absolute inset-0 w-full h-full object-cover z-10"
+          onCanPlay={() => setReady(true)}
         >
           <source src="/videos/shop/pink-ink-hero.mp4" type="video/mp4" />
         </video>
-        
-        {/* Simple overlay to test */}
-        <div className="absolute inset-0 bg-black/40" style={{ zIndex: 3 }} />
-        
         {/* Animated background elements - only render on client to avoid hydration issues */}
         {isClient && (
-          <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 2 }}>
+          <div className="absolute inset-0 overflow-hidden z-20">
             {particles.map((particle) => (
               <motion.div
                 key={particle.id}
