@@ -198,7 +198,14 @@ export function Footer() {
               viewport={{ once: true }}
               className="text-ink-300 text-sm mb-4 md:mb-0"
             >
-              © 2024 Pine Ink Tattoo. All rights reserved.
+              © 2024 Pine Ink Tattoo. All rights reserved. Site created by{" "}
+              <Link
+                href="https://northbridge.studio/"
+                className="underline underline-offset-4 transition-colors hover:text-gold-400"
+              >
+                Northbridge
+              </Link>
+              .
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
