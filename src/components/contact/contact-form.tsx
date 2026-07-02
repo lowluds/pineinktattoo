@@ -63,13 +63,13 @@ export function ContactForm() {
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
     >
-      <Card className="border-0 bg-card/50 backdrop-blur-sm">
+      <Card className="rounded-none border border-white/14 bg-black text-white">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <MessageSquare className="h-5 w-5 text-gold-600" />
+            <MessageSquare className="h-5 w-5 text-white/62" />
             <span>Send Us a Message</span>
           </CardTitle>
-          <p className="text-muted-foreground">
+          <p className="text-white/58">
             Fill out the form below and we'll get back to you as soon as possible.
           </p>
         </CardHeader>
@@ -84,6 +84,7 @@ export function ContactForm() {
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   required
                   placeholder="Your full name"
+                  className="border-white/16 bg-white/10 text-white placeholder:text-white/42"
                 />
               </div>
               <div>
@@ -94,6 +95,7 @@ export function ContactForm() {
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   required
                   placeholder="your.email@example.com"
+                  className="border-white/16 bg-white/10 text-white placeholder:text-white/42"
                 />
               </div>
             </div>
@@ -105,6 +107,7 @@ export function ContactForm() {
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
                 placeholder="(555) 123-4567"
+                className="border-white/16 bg-white/10 text-white placeholder:text-white/42"
               />
             </div>
 
@@ -114,10 +117,10 @@ export function ContactForm() {
                 {inquiryTypes.map((type) => (
                   <div
                     key={type.id}
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${
+                    className={`cursor-pointer rounded-[4px] border p-3 transition-colors ${
                       formData.inquiryType === type.id
-                        ? "border-gold-600 bg-gold-50 dark:bg-gold-900/20"
-                        : "border-border hover:border-gold-300"
+                        ? "border-white bg-white text-black"
+                        : "border-white/18 bg-transparent text-white hover:border-white/42"
                     }`}
                     onClick={() => handleInputChange("inquiryType", type.id)}
                   >
@@ -134,6 +137,7 @@ export function ContactForm() {
                 onChange={(e) => handleInputChange("subject", e.target.value)}
                 required
                 placeholder="Brief subject of your inquiry"
+                className="border-white/16 bg-white/10 text-white placeholder:text-white/42"
               />
             </div>
 
@@ -145,14 +149,14 @@ export function ContactForm() {
                 required
                 placeholder="Tell us more about your inquiry, tattoo ideas, or questions..."
                 rows={6}
+                className="border-white/16 bg-white/10 text-white placeholder:text-white/42"
               />
             </div>
 
             <Button 
               type="submit" 
-              variant="gold" 
               size="lg" 
-              className="w-full"
+              className="w-full rounded-[4px] bg-white text-black hover:bg-white/86"
               disabled={isSubmitting}
             >
               {isSubmitting ? (

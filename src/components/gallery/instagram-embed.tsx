@@ -84,7 +84,6 @@ export function InstagramEmbed({ username, artistName }: InstagramEmbedProps) {
             height="1200"
             frameBorder="0"
             scrolling="no"
-            allowTransparency={true}
             style={{
               background: 'transparent',
               border: 'none',

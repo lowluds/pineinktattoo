@@ -49,7 +49,7 @@ export function Header() {
   const toggleMobileMenu = () => setIsOpen(!isOpen)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 text-white backdrop-blur-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -65,7 +65,7 @@ export function Header() {
                 width={32}
                 height={32}
               />
-              <span className="font-bold text-xl text-foreground">
+              <span className="text-xl font-bold text-white">
                 Pine Ink Tattoo
               </span>
             </motion.div>
@@ -78,16 +78,16 @@ export function Header() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-gold-600 relative",
+                  "relative text-sm font-medium transition-colors hover:text-white",
                   pathname === item.href
-                    ? "text-gold-600"
-                    : "text-muted-foreground"
+                    ? "text-white"
+                    : "text-white/58"
                 )}
               >
                 {item.name}
                 {pathname === item.href && (
                   <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gold-600"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white"
                     layoutId="activeTab"
                     initial={false}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -100,19 +100,19 @@ export function Header() {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="icon" asChild>
+              <Button variant="ghost" size="icon" className="text-white/72 hover:bg-white/10 hover:text-white" asChild>
                 <Link href="https://www.instagram.com/pineinktattoos/" target="_blank" rel="noopener noreferrer">
                   <Instagram className="h-4 w-4" />
                   <span className="sr-only">Instagram</span>
                 </Link>
               </Button>
-              <Button variant="ghost" size="icon" asChild>
+              <Button variant="ghost" size="icon" className="text-white/72 hover:bg-white/10 hover:text-white" asChild>
                 <Link href="https://www.facebook.com/pine.ink.tattoo/" target="_blank" rel="noopener noreferrer">
                   <Facebook className="h-4 w-4" />
                   <span className="sr-only">Facebook</span>
                 </Link>
               </Button>
-              <Button variant="ghost" size="icon" asChild>
+              <Button variant="ghost" size="icon" className="text-white/72 hover:bg-white/10 hover:text-white" asChild>
                 <Link href="tel:+14164869290">
                   <Phone className="h-4 w-4" />
                   <span className="sr-only">Call us</span>
@@ -120,7 +120,7 @@ export function Header() {
               </Button>
             </div>
             
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+            <Button variant="ghost" size="icon" className="text-white/72 hover:bg-white/10 hover:text-white" onClick={toggleTheme}>
               {isDark ? (
                 <Sun className="h-4 w-4" />
               ) : (
@@ -129,14 +129,18 @@ export function Header() {
               <span className="sr-only">Toggle theme</span>
             </Button>
 
-            <Button variant="gold" size="lg" asChild>
+            <Button
+              size="lg"
+              className="rounded-[4px] border border-white/30 bg-transparent px-7 text-white hover:bg-white hover:text-black"
+              asChild
+            >
               <Link href="/booking">Book Now</Link>
             </Button>
           </div>
 
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center space-x-2">
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+            <Button variant="ghost" size="icon" className="text-white/78 hover:bg-white/10 hover:text-white" onClick={toggleTheme}>
               {isDark ? (
                 <Sun className="h-4 w-4" />
               ) : (
@@ -148,6 +152,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
+              className="text-white/78 hover:bg-white/10 hover:text-white"
               onClick={toggleMobileMenu}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
@@ -174,7 +179,7 @@ export function Header() {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           style={{ overflow: "hidden" }}
         >
-          <div className="px-2 pt-2 pb-3 space-y-1 border-t">
+          <div className="space-y-1 border-t border-white/10 px-2 pb-3 pt-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -182,8 +187,8 @@ export function Header() {
                 className={cn(
                   "block px-3 py-2 rounded-md text-base font-medium transition-colors",
                   pathname === item.href
-                    ? "text-gold-600 bg-gold-50 dark:bg-gold-900/20"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    ? "bg-white text-black"
+                    : "text-white/64 hover:bg-white/10 hover:text-white"
                 )}
                 onClick={() => setIsOpen(false)}
               >
@@ -191,21 +196,21 @@ export function Header() {
               </Link>
             ))}
             
-            <div className="pt-4 border-t">
+            <div className="border-t border-white/10 pt-4">
               <div className="flex items-center justify-center space-x-4 mb-4">
-                <Button variant="ghost" size="icon" asChild>
+                <Button variant="ghost" size="icon" className="text-white/72 hover:bg-white/10 hover:text-white" asChild>
                   <Link href="https://www.instagram.com/pineinktattoos/" target="_blank" rel="noopener noreferrer">
                     <Instagram className="h-4 w-4" />
                     <span className="sr-only">Instagram</span>
                   </Link>
                 </Button>
-                <Button variant="ghost" size="icon" asChild>
+                <Button variant="ghost" size="icon" className="text-white/72 hover:bg-white/10 hover:text-white" asChild>
                   <Link href="https://www.facebook.com/pine.ink.tattoo/" target="_blank" rel="noopener noreferrer">
                     <Facebook className="h-4 w-4" />
                     <span className="sr-only">Facebook</span>
                   </Link>
                 </Button>
-                <Button variant="ghost" size="icon" asChild>
+                <Button variant="ghost" size="icon" className="text-white/72 hover:bg-white/10 hover:text-white" asChild>
                   <Link href="tel:+14164869290">
                     <Phone className="h-4 w-4" />
                     <span className="sr-only">Call us</span>
@@ -213,7 +218,7 @@ export function Header() {
                 </Button>
               </div>
               
-              <Button variant="gold" size="lg" className="w-full" asChild>
+              <Button size="lg" className="w-full rounded-[4px] bg-white text-black hover:bg-white/86" asChild>
                 <Link href="/booking" onClick={() => setIsOpen(false)}>
                   Book Now
                 </Link>

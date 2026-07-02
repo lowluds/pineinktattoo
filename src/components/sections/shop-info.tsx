@@ -1,195 +1,132 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { MapPin, Mail, Instagram, ExternalLink } from "lucide-react"
-import Link from "next/link"
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button";
 
-const shopInfo = {
-  location: {
-    address: "2367 Yonge Street",
-    city: "Toronto ON M4P 2C8",
-    floor: "Floor 2"
+const infoItems = [
+  {
+    label: "Location",
+    value: "2367 Yonge Street\nToronto ON M4P 2C8\nFloor 2",
   },
-  email: "pineinktoronto@gmail.com",
-  instagram: {
-    main: "@pineinktattoos",
-    artists: [
-      "@damontattoos_han",
-      "@Bo.Toronto.tattoo", 
-      "@halloweenink",
-      "@rampaintink"
-    ]
-  }
-}
-
-const containerVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      staggerChildren: 0.1,
-    },
+  {
+    label: "Contact",
+    value: "pineinktoronto@gmail.com\n(416) 486-9290",
   },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut" as const,
-    },
+  {
+    label: "Instagram",
+    value: "@pineinktattoos",
+    href: "https://instagram.com/pineinktattoos",
   },
-}
+];
+
+const artistLinks = [
+  "@damontattoos_han",
+  "@Bo.Toronto.tattoo",
+  "@halloweenink",
+  "@rampaintink",
+];
 
 export function ShopInfo() {
   return (
-    <section className="py-12 lg:py-16 bg-gradient-to-br from-ink-800 via-ink-900 to-ink-800 relative overflow-hidden">
-      {/* Background pattern for texture */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="grid grid-cols-8 gap-4 h-full">
-          {[...Array(64)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="bg-gold-500 rounded-full"
-              style={{
-                width: `${Math.random() * 3 + 1}px`,
-                height: `${Math.random() * 3 + 1}px`,
-              }}
-              animate={{
-                opacity: [0.1, 0.3, 0.1],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-        >
-          {/* FIND US */}
-          <motion.div variants={itemVariants} className="text-center group">
-            <div className="mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gold-500/10 rounded-full mb-4 group-hover:bg-gold-500/20 transition-colors">
-                <MapPin className="h-6 w-6 text-gold-500" />
-              </div>
-              <h3 className="text-white font-display font-bold text-xl uppercase tracking-wider mb-4">
-                FIND US
-              </h3>
-            </div>
-            <div className="text-gray-200 space-y-2">
-              <p className="font-medium text-base">{shopInfo.location.address}</p>
-              <p className="font-medium text-base">{shopInfo.location.city}</p>
-              <p className="font-medium text-base">{shopInfo.location.floor}</p>
-            </div>
-          </motion.div>
-
-          {/* EMAIL US */}
-          <motion.div variants={itemVariants} className="text-center group">
-            <div className="mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gold-500/10 rounded-full mb-4 group-hover:bg-gold-500/20 transition-colors">
-                <Mail className="h-6 w-6 text-gold-500" />
-              </div>
-              <h3 className="text-white font-display font-bold text-xl uppercase tracking-wider mb-4">
-                EMAIL US
-              </h3>
-            </div>
-            <div className="text-gray-200">
-              <Link 
-                href={`mailto:${shopInfo.email}`}
-                className="font-medium text-base hover:text-gold-400 transition-colors duration-300"
+    <section className="bg-black py-20 text-white lg:py-28">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/58">
+              Studio details
+            </p>
+            <h2 className="mt-6 max-w-xl font-display text-5xl uppercase leading-[0.95] text-white sm:text-6xl lg:text-7xl">
+              Easy to find. Easy to start.
+            </h2>
+            <p className="mt-7 max-w-lg text-base leading-8 text-white/68 sm:text-lg">
+              Bring your idea, references, placement, and timing. We will match
+              the right artist and shape a clear plan before the appointment.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Button
+                className="h-13 rounded-[4px] bg-white px-7 text-sm font-semibold uppercase tracking-wide text-black hover:bg-white/86"
+                asChild
               >
-                {shopInfo.email}
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* MAIN INSTAGRAM */}
-          <motion.div variants={itemVariants} className="text-center group">
-            <div className="mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gold-500/10 rounded-full mb-4 group-hover:bg-gold-500/20 transition-colors">
-                <Instagram className="h-6 w-6 text-gold-500" />
-              </div>
-              <h3 className="text-white font-display font-bold text-xl uppercase tracking-wider mb-4">
-                INSTAGRAM
-              </h3>
-            </div>
-            <div className="text-gray-200 space-y-1">
-              <Link 
-                href={`https://instagram.com/${shopInfo.instagram.main.replace('@', '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-base hover:text-gold-400 transition-colors duration-300 block"
+                <Link href="/booking">Book Consultation</Link>
+              </Button>
+              <Button
+                variant="outline"
+                className="h-13 rounded-[4px] border-white/24 bg-transparent px-7 text-sm font-semibold uppercase tracking-wide text-white hover:bg-white/10 hover:text-white"
+                asChild
               >
-                {shopInfo.instagram.main}
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* ARTISTS INSTAGRAM */}
-          <motion.div variants={itemVariants} className="text-center group">
-            <div className="mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gold-500/10 rounded-full mb-4 group-hover:bg-gold-500/20 transition-colors">
-                <ExternalLink className="h-6 w-6 text-gold-500" />
-              </div>
-              <h3 className="text-white font-display font-bold text-xl uppercase tracking-wider mb-4">
-                OUR ARTISTS
-              </h3>
-            </div>
-            <div className="text-gray-200 space-y-2">
-              {shopInfo.instagram.artists.map((artist, index) => (
-                <Link 
-                  key={index}
-                  href={`https://instagram.com/${artist.replace('@', '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-base hover:text-gold-400 transition-colors duration-300 block"
-                >
-                  {artist}
+                <Link href="/artists">
+                  See Artists
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
+              </Button>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="border-y border-white/18"
+          >
+            <div className="grid gap-0 xl:grid-cols-[0.85fr_1.45fr_1fr]">
+              {infoItems.map((item) => (
+                <div key={item.label} className="min-w-0 border-white/18 py-7 xl:border-l xl:px-5 xl:first:border-l-0">
+                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/46">
+                    {item.label}
+                  </p>
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 block min-w-0 break-words text-lg leading-7 text-white transition-colors hover:text-white/70"
+                    >
+                      {item.value}
+                    </Link>
+                  ) : (
+                    <p className="mt-4 min-w-0 whitespace-pre-line break-words text-lg leading-7 text-white">
+                      {item.value}
+                    </p>
+                  )}
+                </div>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
 
-        {/* Call to action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Button 
-            variant="gold" 
-            size="lg" 
-            className="font-medium text-base px-8 py-3"
-            asChild
-          >
-            <Link href="/booking">
-              Book Your Consultation
-            </Link>
-          </Button>
-        </motion.div>
+            <div className="border-t border-white/18 py-7 sm:px-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/46">
+                Artist handles
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {artistLinks.map((artist) => (
+                <Link
+                  key={artist}
+                  href={`https://instagram.com/${artist.replace("@", "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-w-0 break-words text-lg text-white/82 transition-colors hover:text-white"
+                >
+                    {artist}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
       </div>
+      <div
+        className="mt-16 h-[360px] w-full bg-[url('/images/pineinktattoos/tattoos/damon-tattoo-2.jpg')] bg-cover bg-center grayscale sm:h-[440px] lg:h-[58vh] lg:max-h-[640px] lg:bg-fixed"
+        aria-label="Tattoo detail by Pine Ink Tattoo"
+      />
     </section>
-  )
+  );
 }

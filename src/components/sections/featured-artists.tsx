@@ -2,10 +2,9 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ExternalLink } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 
 const artists = [
   {
@@ -68,27 +67,24 @@ export function FeaturedArtists() {
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-background">
+    <section className="bg-black py-20 text-white lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mx-auto mb-16 max-w-3xl text-center"
         >
-          <Badge variant="outline" className="mb-4">
-            Meet Our Artists
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-6">
-            World-Class{" "}
-            <span className="bg-gradient-to-r from-gold-600 to-gold-500 bg-clip-text text-transparent">
-              Tattoo Artists
-            </span>
+          <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/50">
+            Our artists
+          </p>
+          <h2 className="mt-5 font-display text-5xl uppercase leading-[0.95] text-white sm:text-6xl lg:text-7xl">
+            Talented Team
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Our talented team of artists brings decades of combined experience 
-            and unique specialties to create your perfect tattoo.
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/64 sm:text-lg">
+            Portfolio-led artists with distinct specialties, clear consultation,
+            and the kind of fit that makes the first session easier.
           </p>
         </motion.div>
 
@@ -100,7 +96,7 @@ export function FeaturedArtists() {
           className="relative"
         >
           {/* Interactive grid container - exactly like CodePen */}
-          <div className="artist-grid w-full max-w-6xl mx-auto h-96">
+          <div className="artist-grid mx-auto h-96 w-full max-w-6xl">
             {artists.map((artist, index) => (
               <motion.div 
                 key={artist.id}
@@ -124,12 +120,17 @@ export function FeaturedArtists() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="mt-14 text-center"
         >
-          <Button variant="outline" size="lg" asChild>
+          <Button
+            variant="outline"
+            size="lg"
+            className="rounded-[4px] border-white/28 bg-transparent px-8 text-sm font-semibold uppercase tracking-wide text-white hover:bg-white/10 hover:text-white"
+            asChild
+          >
             <Link href="/artists">
               Meet All Our Artists
-              <ExternalLink className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </motion.div>
