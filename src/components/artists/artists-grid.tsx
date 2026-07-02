@@ -102,7 +102,7 @@ const ArtistCard = ({ artist, index }: { artist: typeof artists[0], index: numbe
 
   return (
     <motion.div variants={itemVariants}>
-      <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm h-full">
+      <Card className="group h-full overflow-hidden rounded-none border border-white/12 bg-black text-white transition-colors duration-300 hover:border-white/34">
         <div className="relative aspect-[4/5] overflow-hidden">
           {/* Optimized artist image */}
           <Image
@@ -121,15 +121,15 @@ const ArtistCard = ({ artist, index }: { artist: typeof artists[0], index: numbe
           
           {/* Loading placeholder */}
           {!isLoaded && !imageError && (
-            <div className="absolute inset-0 bg-gradient-to-br from-ink-200 to-ink-300 dark:from-ink-700 dark:to-ink-800 flex items-center justify-center">
-              <Loader2 className="h-8 w-8 animate-spin text-gold-500" />
+            <div className="absolute inset-0 flex items-center justify-center bg-white/8">
+              <Loader2 className="h-8 w-8 animate-spin text-white" />
             </div>
           )}
           
           {/* Fallback for missing images */}
           {imageError && (
-            <div className="absolute inset-0 bg-gradient-to-br from-ink-200 to-ink-300 dark:from-ink-700 dark:to-ink-800 flex items-center justify-center">
-              <div className="text-6xl font-bold text-ink-400 dark:text-ink-600">
+            <div className="absolute inset-0 flex items-center justify-center bg-white/8">
+              <div className="text-6xl font-bold text-white/26">
                 {artist.name.split(" ").map(n => n[0]).join("")}
               </div>
             </div>
@@ -141,10 +141,10 @@ const ArtistCard = ({ artist, index }: { artist: typeof artists[0], index: numbe
           {/* Instagram link overlay */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <Button
-              variant="gold"
+              variant="outline"
               size="sm"
               onClick={handleInstagramClick}
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-2 rounded-[4px] border-white/28 bg-black/40 text-white hover:bg-white hover:text-black"
             >
               <Instagram className="h-4 w-4" />
               <span>View Portfolio</span>
@@ -156,15 +156,15 @@ const ArtistCard = ({ artist, index }: { artist: typeof artists[0], index: numbe
           <div className="space-y-3">
             <div>
               <h3 className="text-xl font-semibold mb-1">{artist.name}</h3>
-              <p className="text-gold-600 font-medium">{artist.specialty}</p>
+              <p className="font-medium text-white/64">{artist.specialty}</p>
             </div>
             
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm leading-relaxed text-white/58">
               {artist.description}
             </p>
             
             <div className="flex items-center justify-between pt-2">
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <div className="flex items-center space-x-2 text-sm text-white/50">
                 <Calendar className="h-4 w-4" />
                 <span>{artist.experience}</span>
               </div>
@@ -173,7 +173,7 @@ const ArtistCard = ({ artist, index }: { artist: typeof artists[0], index: numbe
                 variant="outline"
                 size="sm"
                 onClick={handleInstagramClick}
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-2 rounded-[4px] border-white/20 bg-transparent text-white hover:bg-white hover:text-black"
               >
                 <ExternalLink className="h-4 w-4" />
                 <span>Portfolio</span>
@@ -205,7 +205,7 @@ export function ArtistsGrid() {
 
   if (hasError) {
     return (
-      <section className="py-16 lg:py-24 bg-background">
+      <section className="bg-black py-16 text-white lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
@@ -219,12 +219,12 @@ export function ArtistsGrid() {
 
   if (isLoading) {
     return (
-      <section className="py-16 lg:py-24 bg-background">
+      <section className="bg-black py-16 text-white lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-center py-12">
             <div className="flex items-center space-x-2">
-              <Loader2 className="h-6 w-6 animate-spin text-gold-500" />
-              <span className="text-muted-foreground">Loading artists...</span>
+              <Loader2 className="h-6 w-6 animate-spin text-white" />
+              <span className="text-white/58">Loading artists...</span>
             </div>
           </div>
         </div>
@@ -234,7 +234,7 @@ export function ArtistsGrid() {
 
   return (
     <PerformanceOptimizer loadingDelay={50}>
-      <section className="py-16 lg:py-24 bg-background">
+      <section className="bg-black py-16 text-white lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatePresence>
             <motion.div

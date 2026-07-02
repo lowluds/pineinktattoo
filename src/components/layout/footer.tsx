@@ -1,232 +1,137 @@
-"use client"
+import Image from "next/image";
+import Link from "next/link";
 
-import Link from "next/link"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { 
-  Instagram, 
-  Facebook, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock,
-  Heart
-} from "lucide-react"
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-
-const footerLinks = {
-  services: [
-    { name: "Custom Tattoos", href: "/contact" },
-    { name: "Cover-ups", href: "/contact" },
-    { name: "Touch-ups", href: "/contact" },
-  ],
-  info: [
-    { name: "About Us", href: "/about" },
-    { name: "Artists", href: "/artists" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Find Our Studio", href: "/contact#map" },
-  ],
-  support: [
-    { name: "Aftercare", href: "/about" },
-    { name: "FAQ", href: "/about" },
-    { name: "Contact", href: "/contact" },
-  ],
-}
-
-const bottomLinks = [
-  { name: "Privacy Policy", href: "/privacy" },
-  { name: "Terms of Service", href: "/terms" },
-  { name: "Cookie Policy", href: "/cookies" },
-]
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Artists", href: "/artists" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Booking", href: "/booking" },
+  { name: "Contact", href: "/contact" },
+];
 
 const socialLinks = [
-  {
-    name: "Instagram",
-    href: "https://instagram.com/pineinktattoos",
-    icon: Instagram,
-  },
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/pine.ink.tattoo/",
-    icon: Facebook,
-  },
-]
+  { name: "Instagram", href: "https://instagram.com/pineinktattoos" },
+  { name: "Facebook", href: "https://www.facebook.com/pine.ink.tattoo/" },
+];
+
+const policyLinks = [
+  { name: "Aftercare", href: "/about" },
+  { name: "Deposit Policy", href: "/booking" },
+  { name: "FAQ", href: "/about" },
+];
 
 export function Footer() {
   return (
-    <footer className="bg-ink-900 text-white">
-      {/* Main Footer Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="lg:col-span-1">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <Link href="/" className="flex items-center space-x-3 mb-4">
-                <div className="relative h-12 w-12">
-                  <Image
-                    src="/images/pineinktattoos/shop/logo.png"
-                    alt="Pine Ink Tattoo Logo"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <span className="font-bold text-xl">Pine Ink Tattoo</span>
+    <footer className="border-t border-white/10 bg-black text-white">
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1fr_1fr] lg:items-start">
+          <Link href="/" className="font-display text-5xl uppercase leading-none tracking-normal sm:text-6xl">
+            Pine Ink
+          </Link>
+
+          <div>
+            <p className="text-sm text-white/46">Location</p>
+            <p className="mt-4 text-lg leading-7 text-white">
+              2367 Yonge Street
+              <br />
+              Toronto ON M4P 2C8
+              <br />
+              Floor 2
+            </p>
+          </div>
+
+          <div>
+            <p className="text-sm text-white/46">Contact Us</p>
+            <div className="mt-4 space-y-2 text-lg text-white">
+              <Link href="tel:+14164869290" className="block transition-colors hover:text-white/68">
+                Phone: (416) 486-9290
               </Link>
-              
-              <p className="text-ink-300 mb-6 leading-relaxed">
-                Creating stunning, custom tattoos with artistry and professionalism. 
-                Your story, our ink, forever beautiful.
-              </p>
-
-              {/* Contact Info */}
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <MapPin className="h-4 w-4 text-gold-500" />
-                  <span className="text-ink-300 text-sm">
-                    2367 Yonge Street, Toronto ON M4P 2C8, Floor 2
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="h-4 w-4 text-gold-500" />
-                  <span className="text-ink-300 text-sm">
-                    (416) 486-9290
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Mail className="h-4 w-4 text-gold-500" />
-                  <span className="text-ink-300 text-sm">
-                    pineinktoronto@gmail.com
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2">
-                {footerLinks.info.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-ink-300 hover:text-gold-400 transition-colors text-sm"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-
-          {/* Services */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-lg font-semibold mb-4">Services</h3>
-              <ul className="space-y-2">
-                {footerLinks.services.map((service) => (
-                  <li key={service.name}>
-                    <Link
-                      href={service.href}
-                      className="text-ink-300 hover:text-gold-400 transition-colors text-sm"
-                    >
-                      {service.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-
-          {/* Social Links */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-              <div className="flex space-x-4">
-                {socialLinks.map((social) => {
-                  const Icon = social.icon
-                  return (
-                    <Link
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-ink-300 hover:text-gold-400 transition-colors"
-                    >
-                      <Icon className="h-5 w-5" />
-                    </Link>
-                  )
-                })}
-              </div>
-            </motion.div>
+              <Link href="mailto:pineinktoronto@gmail.com" className="block transition-colors hover:text-white/68">
+                Email: pineinktoronto@gmail.com
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-ink-700">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-ink-300 text-sm mb-4 md:mb-0"
-            >
-              © 2024 Pine Ink Tattoo. All rights reserved. Site created by{" "}
-              <Link
-                href="https://northbridge.studio/"
-                className="underline underline-offset-4 transition-colors hover:text-gold-400"
-              >
-                Northbridge
-              </Link>
-              .
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="flex space-x-6 text-sm"
-            >
-              {footerLinks.support.map((link) => (
+        <div className="relative mt-16 h-[240px] overflow-hidden sm:h-[320px] lg:h-[360px]">
+          <Image
+            src="/images/pineinktattoos/tattoos/raven-tattoo-4.jpg"
+            alt="Detailed tattoo work from Pine Ink Tattoo"
+            fill
+            sizes="(min-width: 1024px) 1200px, 100vw"
+            className="object-cover grayscale"
+          />
+          <div className="absolute inset-0 bg-black/18" />
+        </div>
+
+        <div className="mt-16 grid gap-12 lg:grid-cols-[0.9fr_1fr_1fr]">
+          <div>
+            <p className="font-display text-4xl uppercase leading-none text-white sm:text-5xl">
+              Where your story becomes ink.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-10">
+            <div>
+              <p className="text-sm text-white/46">Links</p>
+              <div className="mt-5 space-y-3">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="block text-base text-white transition-colors hover:text-white/64"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm text-white/46">Social</p>
+              <div className="mt-5 space-y-3">
+                {socialLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-base text-white transition-colors hover:text-white/64"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-sm text-white/46">Studio Notes</p>
+            <div className="mt-5 space-y-3">
+              {policyLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-ink-300 hover:text-gold-400 transition-colors"
+                  className="block text-base text-white transition-colors hover:text-white/64"
                 >
                   {link.name}
                 </Link>
               ))}
-            </motion.div>
+            </div>
           </div>
+        </div>
+
+        <div className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-white/58 md:flex-row md:items-center md:justify-between">
+          <p>&copy; 2026 Pine Ink Tattoo. All rights reserved.</p>
+          <p>
+            Built by{" "}
+            <Link href="https://northbridge.studio/" className="text-white transition-colors hover:text-white/64">
+              Northbridge
+            </Link>
+          </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

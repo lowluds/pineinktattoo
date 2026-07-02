@@ -2,10 +2,9 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { Eye, Heart, ExternalLink, Instagram } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 
 // Instagram posts data for clean photo gallery
 // Replace these imageUrl values with actual tattoo images from your artists
@@ -119,10 +118,10 @@ const containerVariants = {
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
-    scale: 1,
+    y: 0,
     transition: {
       duration: 0.5,
       ease: "easeOut" as const,
@@ -132,27 +131,24 @@ const itemVariants = {
 
 export function GalleryShowcase() {
   return (
-    <section className="py-16 lg:py-24 bg-muted/30">
+    <section className="bg-black py-20 text-white lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mx-auto mb-16 max-w-3xl text-center"
         >
-          <Badge variant="outline" className="mb-4">
-            Our Latest Work
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-6">
-            Stunning{" "}
-            <span className="bg-gradient-to-r from-gold-600 to-gold-500 bg-clip-text text-transparent">
-              Tattoo Gallery
-            </span>
+          <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/50">
+            Gallery
+          </p>
+          <h2 className="mt-5 font-display text-5xl uppercase leading-[0.95] text-white sm:text-6xl lg:text-7xl">
+            Explore Our Tattoo Gallery
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Explore our collection of custom tattoos, from intricate realism
-            to bold traditional designs.
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/64 sm:text-lg">
+            Recent custom work from the studio, shown simply so the artwork can
+            carry the page.
           </p>
         </motion.div>
 
@@ -211,10 +207,15 @@ export function GalleryShowcase() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Button variant="gold" size="lg" asChild>
+          <Button
+            variant="outline"
+            size="lg"
+            className="rounded-[4px] border-white/28 bg-transparent px-8 text-sm font-semibold uppercase tracking-wide text-white hover:bg-white/10 hover:text-white"
+            asChild
+          >
             <Link href="/gallery">
               View Full Gallery
-              <ExternalLink className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </motion.div>

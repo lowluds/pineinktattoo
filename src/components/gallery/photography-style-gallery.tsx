@@ -68,80 +68,52 @@ export function PhotographyStyleGallery() {
 
   if (!isClient) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-black text-white">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold-500 mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading gallery...</p>
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-white"></div>
+          <p className="text-white/64">Loading gallery...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <section className="relative h-[40vh] flex items-center justify-center bg-gradient-to-br from-ink-900 via-ink-800 to-ink-700 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/pineinktattoos/shop/banner-2.png"
-            alt="Pine Ink Tattoo Gallery Background"
-            fill
-            className="object-cover opacity-40"
-            priority
-          />
-        </div>
-        
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50" />
-        
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="grid grid-cols-8 gap-4 h-full">
-            {[...Array(64)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="bg-gold-500 rounded-full"
-                style={{
-                  width: `${Math.random() * 4 + 1}px`,
-                  height: `${Math.random() * 4 + 1}px`,
-                }}
-                animate={{
-                  opacity: [0.1, 0.3, 0.1],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                }}
-              />
-            ))}
-          </div>
-        </div>
+      <section className="relative flex min-h-[56vh] items-center overflow-hidden bg-black">
+        <Image
+          src="/images/pineinktattoos/shop/banner-2.png"
+          alt="Dragon and floral tattoo artwork for Pine Ink gallery"
+          fill
+          className="object-cover object-center opacity-42"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/42" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/62 to-black/24" />
 
-        <div className="relative z-10 text-center text-white px-4">
+        <div className="container relative z-10 mx-auto px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="max-w-full lg:max-w-4xl"
           >
-            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
-              Pine Ink{" "}
-              <span className="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">
-                Gallery
-              </span>
+            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/58">
+              Gallery
+            </p>
+            <h1 className="mt-6 font-display text-5xl uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl">
+              Pine Ink Gallery
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Explore our curated collection of exceptional tattoo artistry. 
-              Each piece tells a unique story through masterful technique and creative vision.
+            <p className="mt-7 max-w-xl text-base leading-8 text-white/86 sm:text-xl">
+              Explore recent work from the studio, then follow the artist whose
+              portfolio feels closest to your idea.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Gallery Content */}
-      <section className="py-12">
+      <section className="py-12 sm:py-16">
         <div className="container mx-auto px-4">
           {/* Artist Selection */}
           <div className="mb-8">
@@ -149,9 +121,11 @@ export function PhotographyStyleGallery() {
               {Object.entries(artistInstagramMap).map(([artistId, artist]) => (
                 <Button
                   key={artistId}
-                  variant={selectedArtist === artistId ? "default" : "outline"}
+                  variant="outline"
                   onClick={() => handleArtistSelect(artistId)}
-                  className="px-6 py-3"
+                  className={`rounded-[4px] border-white/24 px-6 py-3 text-white hover:bg-white hover:text-black ${
+                    selectedArtist === artistId ? "bg-white text-black" : "bg-transparent"
+                  }`}
                 >
                   {artist.name}
                 </Button>

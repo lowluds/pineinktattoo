@@ -77,8 +77,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Preload critical resources */}
-        <link rel="preload" href="/images/pineinktattoos/shop/hero-tatto-pic.png" as="image" />
-        <link rel="preload" href="/images/pineinktattoos/artists/damon.jpg" as="image" />
+        <link rel="preload" href="/images/pineinktattoos/shop/hero-logo-top-mobile.jpg" as="image" />
+        <link rel="preload" href="/images/pineinktattoos/artists/damon.png" as="image" />
         
         {/* Performance monitoring */}
         <script

@@ -1,201 +1,97 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Link from "next/link"
-import { Calendar, Clock, Shield, Award, ArrowRight, CheckCircle } from "lucide-react"
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
 
-const features = [
+const steps = [
   {
-    icon: Calendar,
-    title: "Easy Booking",
-    description: "Schedule your consultation online in just a few clicks",
+    label: "01",
+    title: "Tell us the idea",
+    description: "Share placement, size, style, references, and any artist preference.",
   },
   {
-    icon: Shield,
-    title: "Safe & Clean",
-    description: "Hospital-grade sterilization and safety protocols",
+    label: "02",
+    title: "Meet the right artist",
+    description: "We shape the concept, timing, and quote before you commit to the session.",
   },
   {
-    icon: Award,
-    title: "Expert Artists",
-    description: "15+ years of combined experience and expertise",
+    label: "03",
+    title: "Leave with a plan",
+    description: "You get clear next steps, deposit details, and aftercare expectations.",
   },
-  {
-    icon: Clock,
-    title: "Flexible Hours",
-    description: "Open 7 days a week to fit your schedule",
-  },
-]
-
-const process = [
-  {
-    step: 1,
-    title: "Book Consultation",
-    description: "Schedule a free consultation to discuss your vision",
-  },
-  {
-    step: 2,
-    title: "Design Creation",
-    description: "Our artists create a custom design just for you",
-  },
-  {
-    step: 3,
-    title: "Tattoo Session",
-    description: "Professional tattooing in our clean, comfortable studio",
-  },
-  {
-    step: 4,
-    title: "Aftercare Support",
-    description: "Complete aftercare guidance for perfect healing",
-  },
-]
+];
 
 export function BookingCTA() {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-ink-900 to-ink-800 text-white relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
+    <section className="bg-black py-20 text-white lg:py-28">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid items-end gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+          >
+            <p className="mb-5 text-xs font-medium uppercase tracking-[0.42em] text-white/55">
+              Consultations
+            </p>
+            <h2 className="max-w-3xl font-display text-5xl font-medium uppercase leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+              Ready to get your dream tattoo?
+            </h2>
+          </motion.div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-6">
-            Ready to Get Your{" "}
-            <span className="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">
-              Dream Tattoo?
-            </span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-            Join thousands of satisfied clients who chose Pine Ink for their tattoo journey. 
-            Book your free consultation today and let's bring your vision to life.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="xl" variant="gold" className="group" asChild>
-              <Link href="/booking">
-                Book Free Consultation
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-            
-            <Button size="xl" variant="outline" className="border-white/20 dark:text-white text-black hover:bg-white/10 dark:hover:bg-white/10" asChild>
-              <Link href="/contact">
-                Ask Questions
-              </Link>
-            </Button>
-          </div>
-        </motion.div>
-
-        {/* Features Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-        >
-          {features.map((feature, index) => {
-            const Icon = feature.icon
-            return (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                viewport={{ once: true }}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="max-w-2xl lg:ml-auto"
+          >
+            <p className="text-lg leading-8 text-white/68">
+              A good tattoo starts before the machine turns on. Send the idea, bring the references, and we will help match the piece to the right artist and appointment path.
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <Button
+                size="xl"
+                className="h-14 rounded-[4px] bg-white px-8 text-sm font-semibold uppercase tracking-wide text-black hover:bg-white/88"
+                asChild
               >
-                <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                  <CardContent className="p-6 text-center">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-gold-500/20 rounded-full mb-4">
-                      <Icon className="h-6 w-6 text-gold-400" />
-                    </div>
-                    <h3 className="font-semibold mb-2 text-white">{feature.title}</h3>
-                    <p className="text-sm text-gray-300">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )
-          })}
-        </motion.div>
-
-        {/* Process Steps */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
-          <h3 className="text-2xl sm:text-3xl font-display font-bold text-center mb-12">
-            Our Simple Process
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {process.map((step, index) => (
-              <motion.div
-                key={step.step}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center"
+                <Link href="/booking">Book Consultation</Link>
+              </Button>
+              <Button
+                size="xl"
+                variant="outline"
+                className="h-14 rounded-[4px] border-white/25 bg-transparent px-8 text-sm font-semibold uppercase tracking-wide text-white hover:bg-white/10 hover:text-white"
+                asChild
               >
-                <div className="relative mb-6">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gold-500 to-gold-600 rounded-full text-white font-bold text-xl mb-4">
-                    {step.step}
-                  </div>
-                  {index < process.length - 1 && (
-                    <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-gold-500/50 to-transparent" />
-                  )}
-                </div>
-                
-                <h4 className="font-semibold text-lg mb-2 text-white">{step.title}</h4>
-                <p className="text-sm text-gray-300">{step.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                <Link href="/contact">
+                  Ask a Question
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </motion.div>
+        </div>
 
-        {/* Trust indicators */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.7, delay: 0.18 }}
           viewport={{ once: true }}
-          className="text-center mt-16 pt-8 border-t border-white/10"
+          className="mt-16 grid border border-white/16 lg:grid-cols-3"
         >
-          <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-300">
-            <div className="flex items-center space-x-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
-              <span>Licensed & Insured</span>
+          {steps.map((step) => (
+            <div key={step.label} className="border-white/16 p-7 lg:border-l lg:first:border-l-0">
+              <div className="text-xs uppercase tracking-[0.34em] text-white/42">{step.label}</div>
+              <h3 className="mt-8 text-2xl font-medium text-white">{step.title}</h3>
+              <p className="mt-4 leading-7 text-white/58">{step.description}</p>
             </div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
-              <span>Health Department Approved</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
-              <span>Award-Winning Studio</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
-              <span>15+ Years Experience</span>
-            </div>
-          </div>
+          ))}
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
