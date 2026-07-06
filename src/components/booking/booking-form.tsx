@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,7 +30,7 @@ const inputClass =
   "h-14 rounded-[4px] border-white/10 bg-white/[0.08] px-4 text-base text-white placeholder:text-white/34 ring-offset-black focus-visible:ring-1 focus-visible:ring-white/55 focus-visible:ring-offset-0";
 
 const selectClass =
-  "h-14 w-full rounded-[4px] border border-white/10 bg-[#1b1b1b] px-4 text-base text-white/78 outline-none transition-colors focus:border-white/45";
+  "h-14 w-full appearance-none rounded-[4px] border border-white/10 bg-[#1b1b1b] py-0 pl-4 pr-12 text-base text-white/78 outline-none transition-colors focus:border-white/45";
 
 export function BookingForm() {
   const [isAdult, setIsAdult] = useState(false);
@@ -59,26 +60,38 @@ export function BookingForm() {
       <div className="grid gap-5 md:grid-cols-2">
         <div>
           <label className="mb-2 block text-sm text-white/62">Service *</label>
-          <select className={selectClass} required defaultValue="">
-            <option value="" disabled>
-              Select...
-            </option>
-            {services.map((service) => (
-              <option key={service}>{service}</option>
-            ))}
-          </select>
+          <div className="relative">
+            <select className={selectClass} required defaultValue="">
+              <option value="" disabled>
+                Select...
+              </option>
+              {services.map((service) => (
+                <option key={service}>{service}</option>
+              ))}
+            </select>
+            <ChevronDown
+              className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white"
+              aria-hidden="true"
+            />
+          </div>
         </div>
 
         <div>
           <label className="mb-2 block text-sm text-white/62">Artist *</label>
-          <select className={selectClass} required defaultValue="">
-            <option value="" disabled>
-              Select...
-            </option>
-            {artists.map((artist) => (
-              <option key={artist}>{artist}</option>
-            ))}
-          </select>
+          <div className="relative">
+            <select className={selectClass} required defaultValue="">
+              <option value="" disabled>
+                Select...
+              </option>
+              {artists.map((artist) => (
+                <option key={artist}>{artist}</option>
+              ))}
+            </select>
+            <ChevronDown
+              className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white"
+              aria-hidden="true"
+            />
+          </div>
         </div>
       </div>
 
